@@ -1,16 +1,8 @@
-const checkName = (req, res, next) => {
-  if (req.body.bathroom_name) {
+const checkComments = (req, res, next) => {
+  if (req.body.comments) {
     return next();
   } else {
-    res.status(400).json({ error: "Bathroom location name is required" });
-  }
-};
-
-const checkAddress = (req, res, next) => {
-  if (req.body.bathroom_address) {
-    return next();
-  } else {
-    res.status(400).json({ error: "Bathroom address is required" });
+    res.status(400).json({ error: "A comment is required" });
   }
 };
 
@@ -22,4 +14,4 @@ const checkRating = (req, res, next) => {
   }
 };
 
-module.exports = { checkName, checkAddress, checkRating };
+module.exports = { checkComments, checkRating };

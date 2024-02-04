@@ -1,8 +1,11 @@
 const db = require("../db/dbConfig");
 
-const getReviews = async () => {
+const getReviews = async (id) => {
   try {
-    const reviews = await db.any("SELECT * FROM bathroomreviews");
+    const reviews = await db.any(
+      "SELECT * FROM reviews WHERE bathroom_id = $1",
+      id
+    );
     return reviews;
   } catch (error) {
     return error;
@@ -11,7 +14,8 @@ const getReviews = async () => {
 
 const getReview = async (id) => {
   try {
-    const review = await db.one("SELECT * FROM bathroomreviews WHERE review_id=$1",
+    const review = await db.one(
+      "SELECT * FROM reviews WHERE bathroom_id=$1",
       id
     );
     return review;
@@ -22,10 +26,15 @@ const getReview = async (id) => {
 
 const createReview = async (review) => {
   try {
-    const { bathroom_name, bathroom_address, rating, description } = review;
+    const { bathroom_id, rating, comments } = review;
+    const newBathroom = await db.one(
+      "INSERT INTO bathroom (bathroom_id) VALUES ($1) RETURNING *",
+      bathroom_id
+    );
+
     const newReview = await db.one(
-      "INSERT INTO bathroomreviews (bathroom_name, bathroom_address, rating, description ) VALUES ($1, $2, $3, $4) RETURNING *",
-      [bathroom_name, bathroom_address, rating, description]
+      "INSERT INTO reviews (bathroom_id, rating, comments ) VALUES ($1, $2, $3) RETURNING *",
+      [bathroom_id, rating, comments]
     );
     return newReview;
   } catch (error) {
@@ -35,10 +44,10 @@ const createReview = async (review) => {
 
 const updateReview = async (id) => {
   try {
-    const { description, rating, bathroom_name, bathroom_adress } = review;
+    const { bathroom_id, rating, comments } = review;
     const updatedReview = await db.one(
-      "UPDATE bathroomreviews SET description=$1, rating=$2, bathroom_name=$3, bathroom_adress=$4 WHERE id=$5 RETURNING *",
-      [description, rating, bathroom_name, bathroom_adress, id]
+      "UPDATE reviews SET bathroom_id=$1, rating=$2, comments=$3, WHERE id=$4 RETURNING *",
+      [bathroom_id, rating, comments, id]
     );
     return updatedReview;
   } catch (error) {
@@ -49,7 +58,7 @@ const updateReview = async (id) => {
 const deleteReview = async (id) => {
   try {
     const deletedReview = await db.one(
-      "DELETE FROM bathroomreviews WHERE review_id=$1 RETURNING *",
+      "DELETE FROM reviews WHERE review_id=$1 RETURNING *",
       id
     );
     return deletedReview;
