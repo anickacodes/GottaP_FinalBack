@@ -44,10 +44,10 @@ const createReview = async (review) => {
 
 const updateReview = async (id) => {
   try {
-    const { description, rating, bathroom_name, bathroom_adress } = review;
+    const { bathroom_id, rating, description } = review;
     const updatedReview = await db.one(
-      "UPDATE bathroomreviews SET description=$1, rating=$2, bathroom_name=$3, bathroom_adress=$4 WHERE id=$5 RETURNING *",
-      [description, rating, bathroom_name, bathroom_adress, id]
+      "UPDATE reviews SET bathroom_id=$1, rating=$2, description=$3, WHERE id=$4 RETURNING *",
+      [bathroom_id, rating, description, id]
     );
     return updatedReview;
   } catch (error) {
@@ -58,7 +58,7 @@ const updateReview = async (id) => {
 const deleteReview = async (id) => {
   try {
     const deletedReview = await db.one(
-      "DELETE FROM bathroomreviews WHERE review_id=$1 RETURNING *",
+      "DELETE FROM reviews WHERE review_id=$1 RETURNING *",
       id
     );
     return deletedReview;
