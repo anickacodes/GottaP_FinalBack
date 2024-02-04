@@ -17,19 +17,19 @@ reviewers.get("/", async (req, res) => {
 });
 reviewers.get("/:id", async (req, res) => {
   try {
-    const {id} = req.params
-    const reviewer = await getReviewer(id)
-    res.status(200).json(reviewer)
+    const { id } = req.params;
+    const reviewer = await getReviewer(id);
+    res.status(200).json(reviewer);
   } catch (error) {
-    res.status(400).json({error: "Not found"})
+    res.status(400).json({ error: "Not found" });
   }
 });
 reviewers.post("/", async (req, res) => {
   try {
-    const newReviewer = await createReviewer(req.body)
-    res.status(401).json(newReviewer)
+    const newReviewer = await createReviewer(req.body);
+    res.status(401).json(newReviewer);
   } catch (error) {
-    res.status(400).json({error: "Not found"})
+    res.status(400).json({ error: "Not found" });
   }
 });
 
