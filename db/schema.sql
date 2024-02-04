@@ -10,7 +10,7 @@ CREATE TABLE bathroom (
 
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
-    description TEXT,
+    comments TEXT,
     rating INTEGER NOT NULL,
     bathroom_id VARCHAR(250),
     FOREIGN KEY (bathroom_id) REFERENCES bathroom(bathroom_id) ON DELETE CASCADE
