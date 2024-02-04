@@ -3,7 +3,7 @@
 const express = require("express")
 const reviews = express.Router()
 const { getReviews, getReview, createReview} = require("../queries/reviews")
-const {checkName, checkAddress, checkRating} =require("../validations/checkReviews")
+const {checkComments, checkRating} =require("../validations/checkReviews")
 
 reviews.get("/:id", async (req, res) => {
     try {
@@ -26,7 +26,7 @@ reviews.get("/:id", async (req, res) => {
     }
 })
 
-reviews.post("/", checkRating, async (req, res) => {
+reviews.post("/", checkRating, checkComments, async (req, res) => {
     try {
         const createdReview = await createReview(req.body)
         res.status(201).json(createdReview)

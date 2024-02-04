@@ -15,7 +15,7 @@ const getReviews = async (id) => {
 const getReview = async (id) => {
   try {
     const review = await db.one(
-      "SELECT * FROM bathroomreviews WHERE review_id=$1",
+      "SELECT * FROM reviews WHERE bathroom_id=$1",
       id
     );
     return review;
@@ -24,17 +24,17 @@ const getReview = async (id) => {
   }
 };
 
-const createReview = async (review) => {
+const createReview = async (reviews) => {
   try {
-    const { bathroom_id, rating, description } = review;
+    const {rating, comments, bathroom_id } = reviews;
     const newBathroom = await db.one(
       "INSERT INTO bathroom (bathroom_id) VALUES ($1) RETURNING *",
       bathroom_id
     );
 
     const newReview = await db.one(
-      "INSERT INTO reviews (bathroom_id, rating, description ) VALUES ($1, $2, $3) RETURNING *",
-      [bathroom_id, rating, description]
+      "INSERT INTO reviews (rating, comments, bathroom_id) VALUES ($1, $2, $3) RETURNING *",
+      [rating, comments, bathroom_id]
     );
     return newReview;
   } catch (error) {
@@ -44,10 +44,10 @@ const createReview = async (review) => {
 
 const updateReview = async (id) => {
   try {
-    const { bathroom_id, rating, description } = review;
+    const {rating, comments, bathroom_id} = review;
     const updatedReview = await db.one(
-      "UPDATE reviews SET bathroom_id=$1, rating=$2, description=$3, WHERE id=$4 RETURNING *",
-      [bathroom_id, rating, description, id]
+      "UPDATE reviews SET rating=$1, comments=$2, bathroom_id=$3, WHERE id=$4 RETURNING *",
+      [rating, comments, bathroom_id, id]
     );
     return updatedReview;
   } catch (error) {
