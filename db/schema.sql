@@ -4,10 +4,14 @@ CREATE DATABASE bathroom_app;
 
 \c bathroom_app;
 
-CREATE TABLE bathroomreviews(
+CREATE TABLE bathroom (
+    bathroom_id VARCHAR(250) PRIMARY KEY 
+);
+
+CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
-    bathroom_name VARCHAR(255) NOT NULL,
-    bathroom_address VARCHAR(255) NOT NULL,
     description TEXT,
-    rating INTEGER NOT NULL
-    );
+    rating INTEGER NOT NULL,
+    bathroom_id VARCHAR(250),
+    FOREIGN KEY (bathroom_id) REFERENCES bathroom(bathroom_id) ON DELETE CASCADE
+);
