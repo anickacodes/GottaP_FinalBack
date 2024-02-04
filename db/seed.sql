@@ -1,5 +1,14 @@
 \c bathroom_app;
 
+INSERT INTO reviewers (first_name, last_name) 
+VALUES
+    ("Nicki", "Lewis"),
+    ("Jesse", "Chong"),
+    ("Kenia", "Decoteau"),
+    ("Natyka", "Callwood"),
+    ("Tyrell", "Oliver"),
+    ("Yulonda", "Wyatt");
+
 INSERT INTO bathroomreviews (bathroom_name, bathroom_address, rating, description)
 VALUES
   ('Kuku Korean Cuisine bathroom', '12-09 Jackson Ave, Queens, NY 11101', 4, 'Very clean and well-maintained.'),
