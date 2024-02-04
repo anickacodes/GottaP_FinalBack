@@ -1,9 +1,10 @@
 \c bathroom_app;
 
-INSERT INTO bathroomreviews (bathroom_name, bathroom_address, rating, description)
+INSERT INTO reviews (rating, comments)
 VALUES
-  ('Kuku Korean Cuisine bathroom', '12-09 Jackson Ave, Queens, NY 11101', 4, 'Very clean and well-maintained.'),
-  ('Cozy Corner Bathroom', '10-37 Jackson Ave, Long Island City, NY 11101', 3, 'Average facilities, could use improvement.'),
-  ('Natures Haven Bathroom', '27-10 43rd Ave, Queens, NY 11101', 4, 'Beautiful surroundings, clean restroom.'),
-  ('Feather Factory Hotel Bathroom', 'Queens County, 26-32 Skillman Ave, Long Island City, NY 11101', 2, 'Good amenities, convenient location.'),
-  ('CVS Bathroom', '2501 Jackson Ave, Long Island City, NY 11101', 5, 'Peaceful atmosphere, top-notch cleanliness.');
+  (4, 'Very clean and well-maintained.'),
+  (3, 'Average facilities, could use improvement.'),
+  (4, 'Beautiful surroundings, clean restroom.'),
+  (2, 'Convenient location, but the restroom is not kept clean'),
+  (5, 'Peaceful atmosphere, top-notch cleanliness.'),
+  (1, 'Very diry');
